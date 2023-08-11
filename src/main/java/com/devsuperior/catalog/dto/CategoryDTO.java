@@ -2,7 +2,9 @@ package com.devsuperior.catalog.dto;
 
 import com.devsuperior.catalog.entities.Category;
 
-public class CategoryDTO {
+import java.io.Serializable;
+
+public class CategoryDTO implements Serializable {
 
     private Long id;
     private String name;
