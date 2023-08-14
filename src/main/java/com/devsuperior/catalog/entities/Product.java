@@ -1,7 +1,6 @@
 package com.devsuperior.catalog.entities;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -99,7 +98,8 @@ public class Product implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
         return getId().equals(product.getId());
     }
 

@@ -8,7 +8,6 @@ import com.devsuperior.catalog.repositories.CategoryRepository;
 import com.devsuperior.catalog.repositories.ProductRepository;
 import com.devsuperior.catalog.services.exceptions.DatabaseException;
 import com.devsuperior.catalog.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,7 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -83,7 +82,7 @@ public class ProductService {
 
         entity.getCategories().clear();
         for(CategoryDTO catDto : dto.getCategories()){
-            Category category = categoryRepository.getReferenceById(catDto.getId());
+            Category category = categoryRepository.getOne(catDto.getId());
             entity.getCategories().add(category);
         }
     }

@@ -1,7 +1,7 @@
 package com.devsuperior.catalog.entities;
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -20,7 +20,7 @@ public class Category implements Serializable {
     private Instant created_At;
 
     @ManyToMany(mappedBy = "categories" )
-    Set<Product> products = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
     public Category(){}
 
@@ -52,7 +52,8 @@ public class Category implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
         return getId().equals(category.getId());
     }
 

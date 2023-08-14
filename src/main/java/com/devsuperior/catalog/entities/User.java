@@ -1,7 +1,6 @@
 package com.devsuperior.catalog.entities;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,10 +15,12 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+
+    @Column(unique= true)
     private String email;
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -40,43 +41,33 @@ public class User implements Serializable {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -84,7 +75,8 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
         return getId().equals(user.getId());
     }
 
